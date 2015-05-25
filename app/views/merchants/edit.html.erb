@@ -1,0 +1,77 @@
+<head>
+	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false&libraries=places"></script>
+</head>
+<div class="wrapper wrapper-content animated fadeIn">
+  	<div class="row">
+    	<div class="col-lg-12">
+      		<div class="ibox float-e-margins">
+        		<div class="ibox-title">
+          			<h5>Business profile</h5>
+        		</div>
+	  			<div class="ibox-content">
+	  			<div class="row m-b-sm" id="show-map">
+	  				<div class="col-sm-12">
+			  			<button class="btn btn-primary btn-outline" type="button" data-toggle="collapse" data-target="#collapse-map" aria-expanded="false" aria-controls="collapse-map">
+		                    <i class="fa fa-google"> </i> Use my Google listing to automatically populate these fields
+		                </button>
+		                <div id="collapse-map" class="collapse">
+
+							<input id="pac-input" class="controls" type="text" placeholder="Search for your business here">
+							<div id="map-canvas"></div>
+							<div class="control-group pull-right" id="select-place-hide" style="display:none;margin-top:10px;">
+								<%= button_tag "Update fields with this data", :id=> "select-place", :class=> "btn btn-w-m btn-default" %>
+							</div>
+						</div>
+                	</div>
+				</div>
+
+
+            		<div class="row">
+              			<div class="col-sm-6">
+
+							<%= render "first_time_message" %>
+
+							<%= simple_form_for @merchant do |f| %>
+									<%= f.input :name %>
+									<%= f.input :description %>
+									<%= f.input :address1 %>
+									<%= f.input :address2 %>
+									<%= f.input :city %>
+									<%= f.input :postcode %>
+									<%= f.input :country, :as => :string %>
+						</div>
+						<div class="col-sm-6">
+									<%= f.input :website %>
+									<%= f.input :phone_number %>
+									<%= f.input :google_url %>
+									<%= f.input :google_place_id %>
+									<%= f.input :google_rating %>
+									<%= f.input :google_num_reviews %>
+									<%= f.input :google_price_level %>
+									<%= f.input :lat, as: :string %>
+									<%= f.input :lng, as: :string %>
+						</div>
+					</div>
+					<div class="txt-center"><%= f.button :submit, "Save", class: "btn btn-primary m-b" %></div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  	<div class="row">
+    	<div class="col-lg-12">
+      		<div class="ibox float-e-margins">
+        		<div class="ibox-title">
+          			<h5>Attach images</h5>
+        		</div>
+	  			<div class="ibox-content">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

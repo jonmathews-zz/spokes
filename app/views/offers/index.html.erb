@@ -1,0 +1,44 @@
+<h2>Listing Offers</h2>
+
+<table class='table' id='people_table'>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <%# Render table row partial for each person object %>
+      <%= render partial: 'table_row_offer_rule', locals: {person: person} %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# Added Bootstrap data modal attribute %>
+<%= link_to 'New Person', '#new_offer_rule_modal', 'data-toggle' => 'modal' %>
+
+<%# Bootstrap modal markup. @see: http://getbootstrap.com/javascript/#modals %>
+<div class="modal fade" id="new_offer_rule_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Create new offer rule</h4>
+      </div>
+      <div class="modal-body">
+        <%# Render the new person form (passing modal => true to enable remote => true) %>
+        <%= render 'form', modal: true %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

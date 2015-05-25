@@ -1,0 +1,35 @@
+<%# Conditionally set remote: true. Also, passing model name as data attribute %>
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= form_for(@offer_rule, remote: remote, html: {role: :form, 'data-model' => 'person'}) do |f| %>
+
+  <% if @offer_rule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@offer_rule.errors.count, "error") %> prohibited this offer_rule from being saved:</h2>
+
+      <ul>
+      <% @offer_rule.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# Added Bootstrap classes, and help-block container for error messages %>
+  <div class="form-group">
+    <%= f.label :first_name, class: 'control-label' %><br>
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <%# Added Bootstrap classes, and help-block container for error messages %>
+  <div class="form-group">
+    <%= f.label :last_name, class: 'control-label' %><br>
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+
+  <%# Added Bootstrap classes %>
+  <div class="actions">
+    <%= f.submit 'Submit', class: 'btn btn-default' %>
+  </div>
+
+<% end %>

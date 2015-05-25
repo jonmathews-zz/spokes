@@ -1,31 +1,26 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
-            <li class="nav-header">
-                <div class="dropdown profile-element">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <li class="nav-header" style="padding-top:19px; padding-bottom:19px">
                         <span class="clear">
-                            <span class="block m-t-xs">
-                                <strong class="font-bold">Example user</strong>
-                            </span> <span class="text-muted text-xs block">Example menu <b class="caret"></b></span>
+                            <span class="block m-t-xs" style="margin-top:0px;">
+                                <strong class="font-bold" style="font-size:16px;color:white;">SPOKES</strong>
+                            </span>
                         </span>
-                    </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </div>
-                <div class="logo-element">
-                    IN+
-                </div>
             </li>
             <li class="<%= 'active' if current_page?('/') %>">
                 <%= link_to "/" do %>
-                <i class="fa fa-laptop"></i> <span class="nav-label">Main page</span>
+                <i class="fa fa-book"></i> <span class="nav-label">Bookings</span>
                 <% end %>
             </li>
-            <li class="<%= 'active' if current_page?('/home/minor') %>">
-                <%= link_to "/home/minor" do %>
-                <i class="fa fa-desktop"></i> <span class="nav-label">Minor page</span>
+            <li class="<%= 'active' if current_page?('/offers/index') %>">
+                <%= link_to "/offers/index" do %>
+                <i class="fa fa-calendar"></i> <span class="nav-label">Offers</span>
+                <% end %>
+            </li>
+            <li class="<%= 'active' if current_page?('/merchants/1/edit') %>">
+                <%= link_to "/merchants/1/edit" do %>
+                <i class="fa fa-cutlery"></i> <span class="nav-label">My business profile</span>
                 <% end %>
             </li>
         </ul>
