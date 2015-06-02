@@ -5,12 +5,6 @@ Myapp::Application.routes.draw do
 
   resources :photos
 
-  namespace :user do
-    root :to => "merchants#edit"
-  end
-
-  # resources :offers
-
   get "home/index"
   get "home/bookings"
   get "home/offers"
