@@ -1,7 +1,16 @@
 Myapp::Application.routes.draw do
-  root 'home#index'
   devise_for :users
   resources :merchants, except: :show
+
+  devise_scope :user do
+    authenticated :user do
+      root 'merchants#edit', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'home#index', as: :unauthenticated_root
+    end
+  end
 
   resources :photos
 

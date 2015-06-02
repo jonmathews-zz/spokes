@@ -23,7 +23,7 @@
                 <i class="fa fa-cutlery"></i> <span class="nav-label">My business profile</span>
                 <% end %>
             </li>
-            <li class="<%= 'active' if ( current_page?('/photos') | current_page?('/') ) %>">
+            <li class="<%= 'active' if ( current_page?('/photos') ) %>">
                 <%= link_to "/photos" do %>
                 <i class="fa fa-picture-o"></i> <span class="nav-label">Add photos</span>
                 <% end %>
