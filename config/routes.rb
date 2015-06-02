@@ -5,6 +5,8 @@ Myapp::Application.routes.draw do
 
   resources :photos
 
+  match 'user_root' => 'home#index', as: :user_root
+
   # resources :offers
 
   get "home/index"
