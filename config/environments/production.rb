@@ -79,6 +79,6 @@ Myapp::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.action_mailer.default_url_options = { host: 'spokesdev.herokuapp.com'}
-  config.consider_all_requests_local = true
+  # config.consider_all_requests_local = true
   config.log_level = :debug
 end
