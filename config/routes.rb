@@ -5,7 +5,9 @@ Myapp::Application.routes.draw do
 
   resources :photos
 
-  match 'user_root' => 'home#index', as: :user_root
+  namespace :user do
+    root :to => "merchants#edit"
+  end
 
   # resources :offers
 
