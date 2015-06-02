@@ -1,6 +1,6 @@
 Myapp::Application.routes.draw do
   root 'home#index'
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
   resources :merchants, except: :show
 
   resources :photos
