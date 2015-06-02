@@ -17,7 +17,7 @@ class MerchantsController < ApplicationController
 		else
 			flash[:error] = "Profile not updated"
 		end
-		redirect_to authenticated_root_path
+		redirect_to edit_merchant_path
 	end
 
 	def post_offer_schedule

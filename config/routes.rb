@@ -1,4 +1,5 @@
 Myapp::Application.routes.draw do
+  root 'home#index'
   devise_for :users
   resources :merchants, except: :show
 
@@ -11,14 +12,6 @@ Myapp::Application.routes.draw do
   get "home/offers"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  authenticated :user do
-    root to: 'merchants#edit', :as => 'authenticated_root'
-  end
-
-  unauthenticated do
-    root to: 'home#index', :as => 'unauthenticated_root'
-  end
 
   match '/merchants/offer_schedule' => 'merchants#post_offer_schedule', :via => [:post]
   get '/merchants/offer_schedule', to: 'merchants#get_offer_schedule'
