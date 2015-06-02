@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150523220224) do
+ActiveRecord::Schema.define(version: 20150601194830) do
 
   create_table "merchants", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.integer  "user_id"
     t.string   "description"
     t.string   "address1"
     t.string   "address2"
@@ -33,17 +33,18 @@ ActiveRecord::Schema.define(version: 20150523220224) do
     t.string   "google_price_level"
     t.decimal  "lat",                precision: 10, scale: 6
     t.decimal  "lng",                precision: 10, scale: 6
+    t.text     "offer_schedule"
   end
 
   add_index "merchants", ["user_id"], name: "index_merchants_on_user_id"
 
-  create_table "offer_rules", force: :cascade do |t|
+  create_table "offers", force: :cascade do |t|
     t.string   "name"
     t.string   "comment"
-    t.date     "first_date"
-    t.date     "last_date"
-    t.time     "time_start"
+    t.date     "start_date"
+    t.time     "start_time"
     t.integer  "duration"
+    t.date     "terminates_on_date"
     t.boolean  "sunday"
     t.boolean  "monday"
     t.boolean  "tuesday"
@@ -52,21 +53,26 @@ ActiveRecord::Schema.define(version: 20150523220224) do
     t.boolean  "friday"
     t.boolean  "saturday"
     t.boolean  "active"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

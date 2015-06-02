@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  comment: MyString
+  start_date: 2015-05-25
+  start_time: 2015-05-25 23:06:30
+  duration: 1
+  terminates_on_date: 2015-05-25
+  sunday: false
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  active: false
+
+two:
+  name: MyString
+  comment: MyString
+  start_date: 2015-05-25
+  start_time: 2015-05-25 23:06:30
+  duration: 1
+  terminates_on_date: 2015-05-25
+  sunday: false
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  active: false

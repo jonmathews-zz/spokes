@@ -18,3 +18,8 @@
 //= require slimscroll/jquery.slimscroll.min.js
 //= require jquery-readyselector
 //= require_tree .
+
+//= require jquery-ui/jquery-ui-1.10.4.min.js
+//= require iCheck/icheck.min.js
+//= require fullcalendar/moment.min.js
+//= require fullcalendar/fullcalendar.min.js

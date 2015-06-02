@@ -1,10 +1,14 @@
 Myapp::Application.routes.draw do
   devise_for :users
-  resources :merchants
-  resources :offers
+  resources :merchants, except: :show
+
+  resources :photos
+
+  # resources :offers
 
   get "home/index"
-  get "home/minor"
+  get "home/bookings"
+  get "home/offers"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,6 +19,9 @@ Myapp::Application.routes.draw do
   unauthenticated do
     root to: 'home#index', :as => 'unauthenticated_root'
   end
+
+  match '/merchants/offer_schedule' => 'merchants#post_offer_schedule', :via => [:post]
+  get '/merchants/offer_schedule', to: 'merchants#get_offer_schedule'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

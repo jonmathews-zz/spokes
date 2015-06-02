@@ -8,19 +8,24 @@
                             </span>
                         </span>
             </li>
-            <li class="<%= 'active' if current_page?('/') %>">
-                <%= link_to "/" do %>
+            <li class="<%= 'active' if current_page?('/home/bookings') %>">
+                <%= link_to home_bookings_path do %>
                 <i class="fa fa-book"></i> <span class="nav-label">Bookings</span>
                 <% end %>
             </li>
-            <li class="<%= 'active' if current_page?('/offers/index') %>">
-                <%= link_to "/offers/index" do %>
+            <li class="<%= 'active' if current_page?('/home/offers') %>">
+                <%= link_to home_offers_path do %>
                 <i class="fa fa-calendar"></i> <span class="nav-label">Offers</span>
                 <% end %>
             </li>
-            <li class="<%= 'active' if current_page?('/merchants/1/edit') %>">
+            <li class="<%= 'active' if ( current_page?('/merchants/1/edit') | current_page?('/') ) %>">
                 <%= link_to "/merchants/1/edit" do %>
                 <i class="fa fa-cutlery"></i> <span class="nav-label">My business profile</span>
+                <% end %>
+            </li>
+            <li class="<%= 'active' if ( current_page?('/photos') | current_page?('/') ) %>">
+                <%= link_to "/photos" do %>
+                <i class="fa fa-picture-o"></i> <span class="nav-label">Add photos</span>
                 <% end %>
             </li>
         </ul>

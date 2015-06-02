@@ -2,6 +2,20 @@
 
 one:
   name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  postcode: MyString
+  country: MyString
+  url: MyString
+  phone_number: MyString
 
 two:
   name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  postcode: MyString
+  country: MyString
+  url: MyString
+  phone_number: MyString
