@@ -1,0 +1,15 @@
+					<div class="carousel slide" id="carousel1">
+                        <div class="carousel-inner">
+                        	<% @merchant.photos.each_with_index do |photo, i| %>
+                            	<div class="item <%= 'active' if i == 0 %>">
+                                	<%= image_tag photo.image_url.to_s, class: 'img-responsive' %>
+                            	</div>
+							<% end %>
+                        </div>
+                        <a data-slide="prev" href="#carousel1" class="left carousel-control">
+                            <span class="icon-prev"></span>
+                        </a>
+                        <a data-slide="next" href="#carousel1" class="right carousel-control">
+                            <span class="icon-next"></span>
+                        </a>
+                    </div>

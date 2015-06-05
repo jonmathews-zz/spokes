@@ -48,19 +48,34 @@ $('.home.offers').ready(function() {
         editable: true,
         droppable: true, // this allows things to be dropped onto the calendar
         allDaySlot: false,
-        forceEventDuration: true,
+        // forceEventDuration: true,
         columnFormat: 'ddd D/M',
-        eventReceive: function(event) {
-            event.created_timestamp = Date.now();
-        },
         events: '/merchants/offer_schedule.json',
-        
+
         eventClick: function(calEvent, jsEvent, view) {
 
             $('#event-title').text(calEvent.title);
             window.current_event_id = calEvent._id;
             $('#edit-offer-box').show();
 
+        },
+        eventReceive: function(event) {
+            var start_time = event.start;
+            var background_color = event.backgroundColor;
+            var title = event.title;
+
+            $('#calendar').fullCalendar('removeEvents', event._id);
+            $('#calendar').fullCalendar( 'renderEvent', {
+                title:"My repeating event",
+                start: start_time.format('H:mm'), // a start time (10am in this example)
+                end: start_time.add(2,'hours').format('H:mm'), // an end time (6pm in this example)
+                dow: [ start_time.day() ],
+                backgroundColor: background_color,
+                title: title,
+                offer_level: title,
+                created_timestamp: moment()
+                }
+            , true )
         }
     });
 });

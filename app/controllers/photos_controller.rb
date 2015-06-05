@@ -1,10 +1,11 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    @photos = current_user.merchant.photos.all
   end
 
   # GET /photos/1
@@ -14,7 +15,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
-    @photo = Photo.new
+    @photo = current_user.merchant.photos.build
   end
 
   # GET /photos/1/edit
@@ -24,12 +25,13 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(photo_params)
+    @photo = current_user.merchant.photos.build(photo_params)
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        format.html { redirect_to photos_path }
         format.json { render action: 'show', status: :created, location: @photo }
+        flash[:success] = 'Photo was successfully created.'
       else
         format.html { render action: 'new' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
@@ -42,8 +44,9 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
+        format.html { redirect_to @photo}
         format.json { head :no_content }
+        flash[:success] = 'Photo was successfully updated.'
       else
         format.html { render action: 'edit' }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
@@ -69,6 +72,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params[:photo]
+      params[:photo].permit!
     end
 end

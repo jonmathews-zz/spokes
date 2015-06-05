@@ -1,5 +1,5 @@
 ruby '2.1.3'
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -27,7 +27,11 @@ gem 'devise', '3.5.1'
 
 gem 'simple_form'
 
+gem 'rmagick', '2.15.2'
+gem 'figaro'
+gem "fog", "~> 1.31"
 gem 'carrierwave'
+# gem 'dropzonejs-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

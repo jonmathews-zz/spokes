@@ -1,7 +1,7 @@
 <head>
 	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false&libraries=places"></script>
 </head>
-<div class="wrapper wrapper-content animated fadeIn">
+<div class="wrapper wrapper-content animated fadeInDown">
   	<div class="row">
     	<div class="col-lg-12">
       		<div class="ibox float-e-margins">
@@ -48,8 +48,8 @@
 									<%= f.input :google_rating %>
 									<%= f.input :google_num_reviews %>
 									<%= f.input :google_price_level %>
-									<%= f.input :lat, as: :string %>
-									<%= f.input :lng, as: :string %>
+									<%= f.hidden_field :lat, as: :string %>
+									<%= f.hidden_field :lng, as: :string %>
 						</div>
 
 						<div class="txt-center"><%= f.button :submit, "Save", class: "btn btn-primary m-b" %></div>
@@ -61,16 +61,21 @@
 	</div>
 
   	<div class="row">
-    	<div class="col-lg-12">
+    	<div class="col-lg-6">
       		<div class="ibox float-e-margins">
         		<div class="ibox-title">
-          			<h5>Attach images</h5>
+          			<h5>My Photos</h5>
+          			<div class="ibox-tools"><a class="collapse-link"><i class="fa fa-chevron-down"></i></a></div>
         		</div>
 	  			<div class="ibox-content">
-
-					</div>
+	  				<% if @merchant.photos.count() == 0 %>
+	  					You have not added any photos yet. <%= link_to 'Click here',new_photo_path %> to add your first photo.
+	  				<% else %>
+						<%= render 'carousel' %>
+					<% end %>
 				</div>
 			</div>
+		</div>
 	</div>
 </div>
 
