@@ -7,6 +7,27 @@ function isInt(value) {
          !isNaN(parseInt(value, 10));
 }
 
+function saveEvents(){
+    var events_array = $('#calendar').fullCalendar('clientEvents');
+    for (var i = 0; i < events_array.length; i++) {
+        delete events_array[i].source
+    }
+    $.ajax({
+        url: "/merchants/offer_schedule",
+        type: "POST",
+        data: JSON.stringify(events_array),
+        dataType:"text",
+        contentType: "application/json; charset=utf-8",
+            
+        success: function(data) {
+            return false;
+        },
+        error: function(data) {
+            return false;
+        }
+    });
+}
+
 $('.home.offers').ready(function() {
 
     $('.i-checks').iCheck({
@@ -55,10 +76,9 @@ $('.home.offers').ready(function() {
         editable: true,
         droppable: true, // this allows things to be dropped onto the calendar
         allDaySlot: false,
-        // forceEventDuration: true,
         columnFormat: 'ddd D/M',
         events: '/merchants/offer_schedule.json',
-        aspectRatio: 1.75,
+        aspectRatio: 1.5,
         scrollTime: "10:00:00",
 
         eventClick: function(calEvent, jsEvent, view) {
@@ -89,7 +109,8 @@ $('.home.offers').ready(function() {
                 numCovers: 10,
                 _id: Date.now()
                 }
-            , true )
+            , true );
+            saveEvents();
         },
         eventDragStart: function( event, jsEvent, ui, view ) {
             $('#edit-offer-box').hide();
@@ -102,41 +123,21 @@ $('.home.offers').ready(function() {
             if (event.start.format('d') != window.current_event.dow) {
                 revertFunc();
             }
-        }
+            saveEvents();
+        },
+
     });
 });
 
-var check_delete = function() {
-
-}
 
 $(document).ready(function() {
-    $('#btn-save').click(function(){
-        var events_array = $('#calendar').fullCalendar('clientEvents');
-        for (var i = 0; i < events_array.length; i++) {
-            delete events_array[i].source
-        }
-        $.ajax({
-            url: "/merchants/offer_schedule",
-            type: "POST",
-            data: JSON.stringify(events_array),
-            dataType:"text",
-            contentType: "application/json; charset=utf-8",
-                
-            success: function(data) {
-                return false;
-            },
-            error: function(data) {
-                return false;
-            }
-        });
-    })
+
 
     $('#btn-delete').click(function(){
         $('#calendar').fullCalendar('removeEvents',window.current_event_id);
-        $('#btn-save').trigger('click');
         $('#edit-offer-box').hide();
-        window.current_event_id = nil;
+        window.current_event_id = null;
+        saveEvents();
     })
 
     $('#btn-save-offer').click(function(){
@@ -159,7 +160,7 @@ $(document).ready(function() {
         window.current_event.discountLevel = discountInput;
         window.current_event.title = discountInput + ' * ' + $('#numCoversInput').val();
         $('#calendar').fullCalendar('updateEvent',window.current_event);
-        $('#btn-save').trigger('click');
+        saveEvents();
 
     })
 
