@@ -8,11 +8,6 @@
                             </span>
                         </span>
             </li>
-<!--             <li class="<%= 'active' if current_page?('/home/bookings') %>">
-                <%= link_to home_bookings_path do %>
-                <i class="fa fa-book"></i> <span class="nav-label">Bookings</span>
-                <% end %>
-            </li> -->
             <li class="<%= 'active' if current_page?('/home/offers') %>">
                 <%= link_to home_offers_path do %>
                 <i class="fa fa-calendar"></i> <span class="nav-label">Offers</span>
@@ -25,7 +20,7 @@
             </li>
             <li class="<%= 'active' if ( request.url.include?('/photos') ) %>">
                 <%= link_to "/photos" do %>
-                <i class="fa fa-picture-o"></i> <span class="nav-label">Manage photos</span>
+                <i class="fa fa-picture-o"></i> <span class="nav-label">Photos</span>
                 <% end %>
             </li>
         </ul>
