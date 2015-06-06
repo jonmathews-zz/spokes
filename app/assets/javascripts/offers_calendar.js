@@ -85,9 +85,15 @@ $('.home.offers').ready(function() {
                 title: discountLevel + ' * 10',
                 discountLevel: discountLevel,
                 numCovers: 10,
-                created_timestamp: moment()
+                _id: Date.now()
                 }
             , true )
+        },
+        eventDragStart: function( event, jsEvent, ui, view ) {
+            $('#edit-offer-box').hide();
+        },
+        eventResizeStart: function( event, jsEvent, ui, view ) {
+            $('#edit-offer-box').hide();
         }
     });
 });
