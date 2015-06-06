@@ -59,6 +59,7 @@ $('.home.offers').ready(function() {
         columnFormat: 'ddd D/M',
         events: '/merchants/offer_schedule.json',
         aspectRatio: 1.75,
+        scrollTime: "10:00:00",
 
         eventClick: function(calEvent, jsEvent, view) {
             var timeDesc = moment().day(calEvent.dow[0]).format('dddd') + 's: ' + moment(calEvent.start).format('h:mma') + '-' + moment(calEvent.end).format('h:mma')
@@ -92,9 +93,15 @@ $('.home.offers').ready(function() {
         },
         eventDragStart: function( event, jsEvent, ui, view ) {
             $('#edit-offer-box').hide();
+            window.current_event = event;
         },
         eventResizeStart: function( event, jsEvent, ui, view ) {
             $('#edit-offer-box').hide();
+        },
+        eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) {
+            if (event.start.format('d') != window.current_event.dow) {
+                revertFunc();
+            }
         }
     });
 });
