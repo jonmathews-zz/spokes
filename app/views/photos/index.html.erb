@@ -17,7 +17,7 @@
               <tbody>
                 <% @photos.each do |photo| %>
                   <tr>
-                    <td><%= image_tag photo.image_url.to_s %></td>
+                    <td><%= image_tag photo.image_url.to_s, class: 'img-responsive' %></td>
                     <td><%= link_to 'Delete', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                   </tr>
                 <% end %>

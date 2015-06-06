@@ -7,7 +7,7 @@
             </div>
             <div class="ibox-content">
 
-			<%= image_tag @photo.image_url.to_s %>
+			<%= image_tag @photo.image_url.to_s, class: 'img-responsive' %>
 			<%= link_to 'Edit', edit_photo_path(@photo) %> |
 			<%= link_to 'Back', photos_path %>
 			</div>
