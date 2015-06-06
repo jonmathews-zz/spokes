@@ -122,9 +122,6 @@ $(document).ready(function() {
                 return false;
             }
         });
-        // $('#calendar').fullCalendar( 'removeEvents' );
-        // $('#calendar').fullCalendar( 'refetchEvents' );
-        $('#edit-offer-box').hide();
     })
 
     $('#btn-delete').click(function(){
