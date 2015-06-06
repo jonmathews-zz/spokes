@@ -24,9 +24,24 @@
         <div class="ibox float-e-margins" id="edit-offer-box">
             <div class="ibox-content">
                 <h2>Edit Offer</h2>
-                <span id='event-title'></span>
+                <div id='event-title'></div>
                 <span id='event-id'></span>
-                <button type="Submit" id="btn-delete" class="btn btn-default block m-t-sm">Delete</button>
+
+<form>
+    <div class="form-group">
+            <label for="discountInput control-label">Discount</label>
+            <input type="text" class="string form-control" id="discountInput">
+    </div>
+    <div class="form-group">
+            <label for="numCoversInput control-label"># covers</label>
+            <input type="text" class="string form-control" id="numCoversInput">
+    </div>
+</form>
+
+                <div class="row zero-margin">
+                    <button type="Submit" id="btn-save-offer" class="btn btn-primary m-t-sm ">Update</button>
+                    <button type="Submit" id="btn-delete" class="btn btn-default m-t-sm">Delete</button>
+                </div>
             </div>
         </div>
     </div>

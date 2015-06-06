@@ -1,4 +1,11 @@
 var current_event_id
+var current_event
+
+function isInt(value) {
+  return !isNaN(value) && 
+         parseInt(Number(value)) == value && 
+         !isNaN(parseInt(value, 10));
+}
 
 $('.home.offers').ready(function() {
 
@@ -51,19 +58,23 @@ $('.home.offers').ready(function() {
         // forceEventDuration: true,
         columnFormat: 'ddd D/M',
         events: '/merchants/offer_schedule.json',
+        aspectRatio: 1.75,
 
         eventClick: function(calEvent, jsEvent, view) {
 
-            $('#event-title').text(calEvent.title);
+            $('#discountInput').val(calEvent.discountLevel);
+            $('#numCoversInput').val(calEvent.numCovers);
             window.current_event_id = calEvent._id;
+            window.current_event = calEvent;
             $('#edit-offer-box').show();
 
         },
         eventReceive: function(event) {
             var start_time = event.start;
             var background_color = event.backgroundColor;
-            var title = event.title;
+            var discountLevel = event.title;
 
+            $('#edit-offer-box').hide();
             $('#calendar').fullCalendar('removeEvents', event._id);
             $('#calendar').fullCalendar( 'renderEvent', {
                 title:"My repeating event",
@@ -71,8 +82,9 @@ $('.home.offers').ready(function() {
                 end: start_time.add(2,'hours').format('H:mm'), // an end time (6pm in this example)
                 dow: [ start_time.day() ],
                 backgroundColor: background_color,
-                title: title,
-                offer_level: title,
+                title: discountLevel + ' * 10',
+                discountLevel: discountLevel,
+                numCovers: 10,
                 created_timestamp: moment()
                 }
             , true )
@@ -86,7 +98,7 @@ var check_delete = function() {
 
 $(document).ready(function() {
     $('#btn-save').click(function(){
-        events_array = $('#calendar').fullCalendar('clientEvents');
+        var events_array = $('#calendar').fullCalendar('clientEvents');
         for (var i = 0; i < events_array.length; i++) {
             delete events_array[i].source
         }
@@ -104,10 +116,35 @@ $(document).ready(function() {
                 return false;
             }
         });
+        $('#calendar').fullCalendar( 'removeEvents' );
+        $('#calendar').fullCalendar( 'refetchEvents' );
+        $('#edit-offer-box').hide();
     })
+
     $('#btn-delete').click(function(){
         $('#calendar').fullCalendar('removeEvents',window.current_event_id);
+        $('#btn-save').trigger('click');
         $('#edit-offer-box').hide();
         window.current_event_id = nil;
     })
+
+    $('#btn-save-offer').click(function(){
+        var x = parseFloat($('#discountInput').val());
+        if (isNaN(x) || x < 0 || x > 100) {
+            alert('Please enter a valid percentage.');
+            return;
+        }
+        if ( !isInt( $('#numCoversInput').val() ) ) {
+            alert('Please enter a valid number of covers.');
+            return;
+        }
+
+        window.current_event.numCovers = $('#numCoversInput').val();
+        window.current_event.discountLevel = $('#discountInput').val();
+        window.current_event.title = $('#discountInput').val() + ' * ' + $('#numCoversInput').val();
+        $('#calendar').fullCalendar('updateEvent',window.current_event);
+        $('#btn-save').trigger('click');
+        // window.current_event_id = nil;
+    })
+
 });
