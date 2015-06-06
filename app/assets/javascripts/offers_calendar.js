@@ -61,9 +61,10 @@ $('.home.offers').ready(function() {
         aspectRatio: 1.75,
 
         eventClick: function(calEvent, jsEvent, view) {
-
+            var timeDesc = moment().day(calEvent.dow[0]).format('dddd') + 's: ' + moment(calEvent.start).format('h:mma') + '-' + moment(calEvent.end).format('h:mma')
             $('#discountInput').val(calEvent.discountLevel);
             $('#numCoversInput').val(calEvent.numCovers);
+            $('#event-description').text(timeDesc);
             window.current_event_id = calEvent._id;
             window.current_event = calEvent;
             $('#edit-offer-box').show();
@@ -132,7 +133,8 @@ $(document).ready(function() {
     })
 
     $('#btn-save-offer').click(function(){
-        var x = parseFloat($('#discountInput').val());
+        var discountInput = $('#discountInput').val();
+        var x = parseFloat(discountInput);
         if (isNaN(x) || x < 0 || x > 100) {
             alert('Please enter a valid percentage.');
             return;
@@ -141,13 +143,17 @@ $(document).ready(function() {
             alert('Please enter a valid number of covers.');
             return;
         }
+        if ( !/%$/.test(discountInput) ) {
+            discountInput = discountInput + '%';
+            $('#discountInput').val(discountInput);
+        }
 
         window.current_event.numCovers = $('#numCoversInput').val();
-        window.current_event.discountLevel = $('#discountInput').val();
-        window.current_event.title = $('#discountInput').val() + ' * ' + $('#numCoversInput').val();
+        window.current_event.discountLevel = discountInput;
+        window.current_event.title = discountInput + ' * ' + $('#numCoversInput').val();
         $('#calendar').fullCalendar('updateEvent',window.current_event);
         $('#btn-save').trigger('click');
-        // window.current_event_id = nil;
+
     })
 
 });
