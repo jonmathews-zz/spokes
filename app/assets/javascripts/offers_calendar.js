@@ -1,5 +1,5 @@
-var current_event_id
-var current_event
+var current_event_id;
+var current_event;
 
 function isInt(value) {
   return !isNaN(value) && 
@@ -86,8 +86,8 @@ $('.home.offers').ready(function() {
             $('#discountInput').val(calEvent.discountLevel);
             $('#numCoversInput').val(calEvent.numCovers);
             $('#event-description').text(timeDesc);
-            window.current_event_id = calEvent._id;
-            window.current_event = calEvent;
+            current_event_id = calEvent._id;
+            current_event = calEvent;
             $('#edit-offer-box').show();
 
         },
@@ -114,13 +114,16 @@ $('.home.offers').ready(function() {
         },
         eventDragStart: function( event, jsEvent, ui, view ) {
             $('#edit-offer-box').hide();
-            window.current_event = event;
+            current_event = event;
         },
         eventResizeStart: function( event, jsEvent, ui, view ) {
             $('#edit-offer-box').hide();
         },
+        eventResizeStop: function( event, jsEvent, ui, view ) {
+            saveEvents();
+        },
         eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) {
-            if (event.start.format('d') != window.current_event.dow) {
+            if (event.start.format('d') != current_event.dow) {
                 revertFunc();
             }
             saveEvents();
@@ -134,9 +137,9 @@ $(document).ready(function() {
 
 
     $('#btn-delete').click(function(){
-        $('#calendar').fullCalendar('removeEvents',window.current_event_id);
+        $('#calendar').fullCalendar('removeEvents',current_event_id);
         $('#edit-offer-box').hide();
-        window.current_event_id = null;
+        current_event_id = null;
         saveEvents();
     })
 
@@ -156,10 +159,10 @@ $(document).ready(function() {
             $('#discountInput').val(discountInput);
         }
 
-        window.current_event.numCovers = $('#numCoversInput').val();
-        window.current_event.discountLevel = discountInput;
-        window.current_event.title = discountInput + ' * ' + $('#numCoversInput').val();
-        $('#calendar').fullCalendar('updateEvent',window.current_event);
+        current_event.numCovers = $('#numCoversInput').val();
+        current_event.discountLevel = discountInput;
+        current_event.title = discountInput + ' * ' + $('#numCoversInput').val();
+        $('#calendar').fullCalendar('updateEvent',current_event);
         saveEvents();
 
     })
